@@ -17,11 +17,12 @@ namespace BackgroundRunner.Tests
             var runner = new Worker(console.Object);
             runner.Add(Act1);
             runner.Add(Act2);
+            runner.Add(Act3);
             runner.Run();
             runner.Cancel();
 
             Thread.Sleep(3000);
-            Assert.That(runner.Executed, Has.Count.EqualTo(1));
+            Assert.That(runner.Executed, Has.Count.LessThan(3));
         }
 
         [Test]
@@ -63,12 +64,17 @@ namespace BackgroundRunner.Tests
 
         public void Act1()
         {
-            Console.WriteLine("Act 1 ");
-            Thread.Sleep(1000);
+            Console.WriteLine("Act 1 ");            
         }
         public void Act2()
         {
             Console.WriteLine("Act 2 ");
+            Thread.Sleep(1000);
+        }
+        public void Act3()
+        {
+            Console.WriteLine("Act 3 ");
+            Thread.Sleep(1000);
         }
     }
 }
